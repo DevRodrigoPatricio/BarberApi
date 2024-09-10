@@ -29,7 +29,7 @@ public class Scheduling {
             joinColumns = @JoinColumn(name = "scheduling_id"), // Coluna de junção para Scheduling
             inverseJoinColumns = @JoinColumn(name = "service_id") // Coluna de junção para Service
     )
-    private Set<Service> services;
+    private Set<Services> services;
 
     private Date date;
     private Status status;

@@ -1,14 +1,14 @@
 package com.barber.Entities;
 
+import com.barber.Entities.Dtos.UserDTO;
 import com.barber.Entities.Enums.UserType;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+
 
 import java.io.Serializable;
 
 @Getter
-@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User  {
@@ -25,4 +25,17 @@ public class User  {
 
     @Column(name = "type", length = 100, nullable = false)
     private UserType type;
+
+    @Column(name = "active", length = 20, nullable = false)
+    private boolean active;
+
+    public  User(){}
+    public User(UserDTO userDTO) {
+        this.name = userDTO.getName();
+        this.email = userDTO.getEmail();
+        this.password= userDTO.getPassword();
+        this.type =userDTO.getType();
+    }
 }
+
+
