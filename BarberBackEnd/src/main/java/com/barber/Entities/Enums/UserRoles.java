@@ -3,12 +3,12 @@ package com.barber.Entities.Enums;
 import lombok.Getter;
 
 @Getter
-public enum UserType {
+public enum UserRoles {
     CLIENT("Cliente"),
     ADMIN("Administrador");
-    private final String type;
-    UserType(String type) {
-        this.type = type;
+    private final String role;
+    UserRoles(String role) {
+        this.role = role;
     }
 
 }

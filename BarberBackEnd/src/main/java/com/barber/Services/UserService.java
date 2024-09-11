@@ -5,6 +5,7 @@ import com.barber.Entities.User;
 import com.barber.Exceptions.EmailAlreadyExistsException;
 import com.barber.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class UserService {
 
 
     public UserDTO create(UserDTO userDto){
-        Optional<User> existingUser = repository.findByEmail(userDto.getEmail());
-        if (existingUser.isPresent()) {
+        UserDetails existingUser = repository.findByEmail(userDto.getEmail());
+        if (existingUser != null) {
             throw new EmailAlreadyExistsException("E-mail já está em uso.");
         }
         userDto.setPassword( passwordEncoder.encode(userDto.getPassword()));
