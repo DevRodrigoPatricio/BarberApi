@@ -1,6 +1,6 @@
 package com.barber.Entities.Dtos;
 
-import com.barber.Entities.Enums.UserType;
+import com.barber.Entities.Enums.UserRoles;
 import com.barber.Entities.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ public class UserDTO {
     private String name;
     private String email;
     private String password;
-    private UserType type;
+    private UserRoles role;
     private boolean active;
 
     public UserDTO(){}
@@ -23,7 +23,7 @@ public class UserDTO {
         this.name = user.getName();
         this.email = user.getEmail();
         this.password= user.getPassword();
-        this.type =user.getType();
+        this.role =user.getRole();
         this.active = user.isActive();
     }
 }
