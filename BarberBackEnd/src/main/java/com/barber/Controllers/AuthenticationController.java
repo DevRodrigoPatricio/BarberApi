@@ -3,7 +3,8 @@ package com.barber.Controllers;
 import com.barber.Entities.Dtos.AuthenticationDTO;
 import com.barber.Entities.Dtos.LoginResponseDTO;
 import com.barber.Entities.User;
-import com.barber.Security.TokenService;
+import com.barber.Infra.Security.TokenService;
+import com.barber.Services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class AuthenticationController {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
