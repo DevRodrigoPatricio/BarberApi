@@ -1,6 +1,8 @@
 package com.barber.Controllers;
 
+import com.barber.Entities.Dtos.ServiceDTO;
 import com.barber.Entities.Dtos.UserDTO;
+import com.barber.Services.ServicesService;
 import com.barber.Services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 public class UserController {
+
     @Autowired
     private UserService service;
 
     @PostMapping
-    public ResponseEntity<UserDTO> create(@Valid @RequestBody UserDTO user){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(user));
+    public ResponseEntity create(@Valid @RequestBody UserDTO data){
+        service.create(data);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso!");
     }
 }

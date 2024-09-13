@@ -2,6 +2,9 @@ package com.barber.Entities.Dtos;
 
 import com.barber.Entities.Enums.UserRoles;
 import com.barber.Entities.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +12,23 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
 
+    @JsonProperty("id")
     private int id;
+
+    @NotNull(message = "O nome do usuário deve-se ser informado!")
+    @NotBlank(message = "O nome do usuário deve-se ser informado!")
     private String name;
+
+    @NotNull(message = "O email do usuário deve-se ser informado!")
+    @NotBlank(message = "O email do usuário deve-se ser informado!")
     private String email;
+
+    @NotNull(message = "A senha do usuário deve-se ser informado!")
+    @NotBlank(message = "A senha do usuário deve-se ser informado!")
     private String password;
+
     private UserRoles role;
+
     private boolean active;
 
     public UserDTO(){}
@@ -26,4 +41,6 @@ public class UserDTO {
         this.role =user.getRole();
         this.active = user.isActive();
     }
+
+
 }

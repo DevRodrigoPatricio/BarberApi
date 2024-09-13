@@ -44,6 +44,7 @@ public class User implements UserDetails {
         this.email = userDTO.getEmail();
         this.password= userDTO.getPassword();
         this.role =userDTO.getRole();
+        this.active = true;
     }
 
     @Override

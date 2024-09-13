@@ -1,4 +1,4 @@
-package com.barber.Security;
+package com.barber.Infra.Security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -6,11 +6,13 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.barber.Entities.User;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.stream.Collectors;
 
 @Service
 public class TokenService {
@@ -21,12 +23,14 @@ public class TokenService {
     public String generateToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create().withIssuer("auth-api")
+            return JWT.create().withIssuer("auth-api")
                     .withSubject(user.getEmail())
+                    .withClaim("roles", user.getAuthorities().stream()
+                            .map(GrantedAuthority::getAuthority)
+                            .collect(Collectors.toList()))  // Adiciona os roles ao token
                     .withExpiresAt(genExirationDate())
                     .sign(algorithm);
 
-            return token;
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Error while generate token ", exception);
         }

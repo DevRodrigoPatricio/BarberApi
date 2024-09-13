@@ -14,7 +14,5 @@ public class Client extends  User  {
     private String telephone;
 
 
-    public Client(UserDTO userDTO) {
-        super(userDTO);
-    }
+
 }
