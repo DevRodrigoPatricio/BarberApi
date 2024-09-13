@@ -1,4 +1,4 @@
-package com.barber.Security;
+package com.barber.Infra.Security;
 
 
 import com.barber.Repositories.UserRepository;
@@ -26,11 +26,30 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token  = this.recoverToken(request);
-        if(token != null){
-            var login  = tokenService.ValidateToken(token);
-            UserDetails user = userRepository.findByEmail(login);
-            var authentication = new UsernamePasswordAuthenticationToken(user, null , user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+//        if(token != null){
+//            var login  = tokenService.ValidateToken(token);
+//            UserDetails user = userRepository.findByEmail(login);
+//
+//            var authentication = new UsernamePasswordAuthenticationToken(user, null , user.getAuthorities());
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//        }
+        if (token != null) {
+            var login = tokenService.ValidateToken(token);
+
+            if (login != null) {
+                UserDetails user = userRepository.findByEmail(login);
+
+                if (user != null) {
+                    var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                } else {
+                    // Log ou tratamento caso o usuário não seja encontrado
+                    System.out.println("Usuário não encontrado: " + login);
+                }
+            } else {
+                // Token inválido ou expirado
+                System.out.println("Token inválido ou expirado.");
+            }
         }
         filterChain.doFilter(request, response);
     }

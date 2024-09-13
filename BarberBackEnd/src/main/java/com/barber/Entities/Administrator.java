@@ -9,7 +9,5 @@ public class Administrator extends User {
     @Column(name = "functionsAdm", length = 255, nullable = false)
     private String functionsAdm;
 
-    public Administrator(UserDTO userDTO) {
-        super(userDTO);
-    }
+
 }

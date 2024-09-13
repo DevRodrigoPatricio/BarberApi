@@ -26,6 +26,8 @@ public class UserService {
 
 
     public UserDTO create(UserDTO userDto){
+
+
         UserDetails existingUser = repository.findByEmail(userDto.getEmail());
         if (existingUser != null) {
             throw new EmailAlreadyExistsException("E-mail já está em uso.");
