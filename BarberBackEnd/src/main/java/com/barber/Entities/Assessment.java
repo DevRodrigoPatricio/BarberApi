@@ -15,8 +15,8 @@ public class Assessment {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToMany
     @JoinTable(

@@ -8,10 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -25,4 +22,22 @@ public class UserController {
         service.create(data);
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso!");
     }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+        service.sendRecoveryEmail(email);
+        return ResponseEntity.ok("Email de recuperação enviado com sucesso.");
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestParam String token,
+                                                @RequestParam String newPassword) {
+        boolean success = service.resetPassword(token, newPassword);
+        if (success) {
+            return ResponseEntity.ok("Senha redefinida com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token inválido ou expirado.");
+        }
+    }
+
 }
