@@ -39,7 +39,10 @@ public class SecurityConfigurations {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/user").hasRole("ADMIN")
+<<<<<<< HEAD
                         .requestMatchers(HttpMethod.POST, "/forgot-password").permitAll()
+=======
+>>>>>>> 3cda2f9a478d80524af3fd2ea6982804bf5f3924
                         .requestMatchers(HttpMethod.POST, "/services").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
