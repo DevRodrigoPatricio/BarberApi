@@ -11,12 +11,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
     private UserService service;
+
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping
+    private  ResponseEntity<List<UserDTO>> getUser(){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.findAll());
+    }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
