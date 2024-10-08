@@ -13,7 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -28,6 +30,12 @@ public class UserService {
     @Autowired
     public UserService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+
+    public List<UserDTO> findAll(){
+        List<User> users = repository.findAll();
+        return users.stream().map(UserDTO::new).collect(Collectors.toList());
     }
 
     public User findById(Integer id) {
