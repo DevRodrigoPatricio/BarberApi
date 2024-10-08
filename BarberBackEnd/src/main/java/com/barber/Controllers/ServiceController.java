@@ -25,6 +25,12 @@ public class ServiceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.findAll());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
+    @GetMapping(value = "/{name}")
+    public ResponseEntity<List<ServiceDTO>> findByName(@PathVariable String name) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.findByName(name));
+    }
+
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "/{id}")
@@ -32,6 +38,8 @@ public class ServiceController {
         service.update(id,data);
         return  ResponseEntity.status(HttpStatus.CREATED).body("Serviço atualizado com sucesso!");
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
 
     @PostMapping
     public ResponseEntity<ServiceDTO> create(@Valid @RequestBody ServiceDTO serviceDto){

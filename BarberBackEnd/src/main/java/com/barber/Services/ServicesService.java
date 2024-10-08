@@ -27,6 +27,11 @@ public class ServicesService {
         return service.orElseThrow(() -> new ObjectnotFoundException("serviço não econtrado " + id));
     }
 
+    public  List<ServiceDTO> findByName(String name){
+        List<Services> services =  repository.findByName(name);
+        return services.stream().map(ServiceDTO::new).collect(Collectors.toList());
+    }
+
     public ServiceDTO create(ServiceDTO serviceDTO){
         Services service = new Services(serviceDTO);
         repository.save(service);
