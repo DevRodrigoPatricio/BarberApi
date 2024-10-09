@@ -39,10 +39,10 @@ public class ServicesService {
 
     }
 
-    public Services update(Integer id, @Valid ServiceDTO serviceDTO) {
+    public void update(Integer id, @Valid ServiceDTO serviceDTO) {
         Services oldservice = findById(id);
         oldservice = new Services(serviceDTO);
         oldservice.setId(id);
-        return repository.save(oldservice);
+         repository.save(oldservice);
     }
 }

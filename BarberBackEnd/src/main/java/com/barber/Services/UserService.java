@@ -1,6 +1,8 @@
 package com.barber.Services;
 
+import com.barber.Entities.Dtos.ServiceDTO;
 import com.barber.Entities.Dtos.UserDTO;
+import com.barber.Entities.Services;
 import com.barber.Entities.User;
 import com.barber.Exceptions.EmailAlreadyExistsException;
 import com.barber.Exceptions.ObjectnotFoundException;
@@ -33,9 +35,9 @@ public class UserService {
     }
 
 
-    public List<UserDTO> findAll(){
-        List<User> users = repository.findAll();
-        return users.stream().map(UserDTO::new).collect(Collectors.toList());
+    public List<UserDTO> findAll() {
+        List<User> services = repository.findAll();
+        return services.stream().map(UserDTO::new).collect(Collectors.toList());
     }
 
     public User findById(Integer id) {

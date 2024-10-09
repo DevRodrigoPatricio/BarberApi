@@ -10,35 +10,30 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDTO {
+public class SchedulingDTO {
 
     @JsonProperty("id")
     private int id;
 
     @NotNull(message = "O nome do usuário deve-se ser informado!")
     @NotBlank(message = "O nome do usuário deve-se ser informado!")
-    @JsonProperty("name")
     private String name;
 
     @NotNull(message = "O email do usuário deve-se ser informado!")
     @NotBlank(message = "O email do usuário deve-se ser informado!")
-    @JsonProperty("email")
     private String email;
 
     @NotNull(message = "A senha do usuário deve-se ser informado!")
     @NotBlank(message = "A senha do usuário deve-se ser informado!")
-    @JsonProperty("password")
     private String password;
 
-    @JsonProperty("role")
     private UserRoles role;
 
-    @JsonProperty("active")
     private boolean active;
 
-    public UserDTO(){}
+    public SchedulingDTO(){}
 
-    public UserDTO(User user) {
+    public SchedulingDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();

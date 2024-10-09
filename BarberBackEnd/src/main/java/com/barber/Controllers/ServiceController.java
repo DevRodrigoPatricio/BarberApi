@@ -2,6 +2,7 @@ package com.barber.Controllers;
 
 
 import com.barber.Entities.Dtos.ServiceDTO;
+import com.barber.Entities.Dtos.UserDTO;
 import com.barber.Services.ServicesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,9 @@ public class ServiceController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-
     @PostMapping
     public ResponseEntity<ServiceDTO> create(@Valid @RequestBody ServiceDTO serviceDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(serviceDto));
     }
+
 }

@@ -25,6 +25,10 @@ public class Services {
     @Column(name = "price", length = 150, nullable = false)
     private BigDecimal price;
 
+    @ManyToOne
+    @JoinColumn(name = "barber_id")
+    private Barber barberId;
+
 
     public Services(){}
     public Services(ServiceDTO service){
@@ -32,5 +36,6 @@ public class Services {
         this.name = service.getName();
         this.description =service.getDescription();
         this.price = service.getPrice();
+        this.barberId = service.getBarberId();
     }
 }

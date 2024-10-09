@@ -1,12 +1,17 @@
 package com.barber.Entities;
 
+import com.barber.Entities.Dtos.BarberDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Barber {
 
     @Id
@@ -18,4 +23,8 @@ public class Barber {
     @Column(name = "specialties", length = 255, nullable = true)
     private String specialties;
 
+    public Barber(BarberDTO barberDTO) {
+        this.name = barberDTO.getName();
+        this.specialties = barberDTO.getSpecialties();
+    }
 }
