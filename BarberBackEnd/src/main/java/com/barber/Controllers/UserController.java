@@ -23,7 +23,7 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
-    private  ResponseEntity<List<UserDTO>> getUser(){
+    public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.findAll());
     }
 

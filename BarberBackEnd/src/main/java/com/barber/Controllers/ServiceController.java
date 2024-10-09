@@ -2,6 +2,7 @@ package com.barber.Controllers;
 
 
 import com.barber.Entities.Dtos.ServiceDTO;
+import com.barber.Entities.Dtos.UserDTO;
 import com.barber.Services.ServicesService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class ServiceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.findAll());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
+    @GetMapping(value = "/{name}")
+    public ResponseEntity<List<ServiceDTO>> findByName(@PathVariable String name) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.findByName(name));
+    }
+
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "/{id}")
@@ -33,8 +40,10 @@ public class ServiceController {
         return  ResponseEntity.status(HttpStatus.CREATED).body("Serviço atualizado com sucesso!");
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<ServiceDTO> create(@Valid @RequestBody ServiceDTO serviceDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(serviceDto));
     }
+
 }
