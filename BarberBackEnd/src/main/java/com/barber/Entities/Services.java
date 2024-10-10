@@ -2,7 +2,10 @@ package com.barber.Entities;
 
 import com.barber.Entities.Dtos.ServiceDTO;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -10,32 +13,35 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Services {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name", length = 150, nullable = false)
     private String name;
 
     @Column(name = "description", length = 150, nullable = false)
-    private String  description;
+    private String description;
 
     @Column(name = "price", length = 150, nullable = false)
     private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "barber_id")
-    private Barber barberId;
+    @JoinColumn(name = "barber_id", referencedColumnName = "id", nullable = false)
+    private Barber barber;
 
+    public Services(@Valid ServiceDTO serviceDTO) {
+    }
 
-    public Services(){}
-    public Services(ServiceDTO service){
-        this.id= service.getId();
+    public Services(ServiceDTO service, Barber barber) {
+        this.id = service.getId();
         this.name = service.getName();
-        this.description =service.getDescription();
+        this.description = service.getDescription();
         this.price = service.getPrice();
-        this.barberId = service.getBarberId();
+        this.barber = barber;
     }
 }

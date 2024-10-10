@@ -1,8 +1,6 @@
 package com.barber.Controllers;
 
-import com.barber.Entities.Dtos.ServiceDTO;
 import com.barber.Entities.Dtos.UserDTO;
-import com.barber.Services.ServicesService;
 import com.barber.Services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +27,18 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody UserDTO data){
+    public ResponseEntity create(@Valid @RequestBody UserDTO data) {
         service.create(data);
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso!");
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
     @PutMapping(value = "/{id}")
-    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody UserDTO data){
-        service.update(id,data);
-        return  ResponseEntity.status(HttpStatus.CREATED).body("Usuário atualizado com sucesso!");
+    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody UserDTO data) {
+        service.update(id, data);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário atualizado com sucesso!");
     }
+
     @PostMapping("/forgot-password")
     public ResponseEntity<String> forgotPassword(@RequestParam String email) {
         service.sendRecoveryEmail(email);

@@ -27,7 +27,7 @@ public class BarberService {
         return barber.orElseThrow(() -> new ObjectnotFoundException("serviço não econtrado " + id));
     }
 
-    public BarberDTO create(BarberDTO barberDTO){
+    public BarberDTO create(BarberDTO barberDTO) {
         Barber barber = new Barber(barberDTO);
         repository.save(barber);
         return new BarberDTO(barber);

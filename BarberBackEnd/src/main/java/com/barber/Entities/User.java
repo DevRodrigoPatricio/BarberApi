@@ -18,10 +18,10 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of ="id")
+@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name", length = 150, nullable = false)
     private String name;
@@ -40,14 +40,14 @@ public class User implements UserDetails {
     public User(UserDTO userDTO) {
         this.name = userDTO.getName();
         this.email = userDTO.getEmail();
-        this.password= userDTO.getPassword();
-        this.role =userDTO.getRole();
+        this.password = userDTO.getPassword();
+        this.role = userDTO.getRole();
         this.active = true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRoles.ADMIN) return  List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+        if (this.role == UserRoles.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
                 new SimpleGrantedAuthority("ROLE_CLIENT"));
         else return List.of(new SimpleGrantedAuthority("ROLE_CLIENT"));
     }

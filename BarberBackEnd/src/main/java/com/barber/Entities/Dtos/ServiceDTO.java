@@ -1,17 +1,20 @@
 package com.barber.Entities.Dtos;
 
-import com.barber.Entities.Barber;
 import com.barber.Entities.Services;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServiceDTO {
 
     @JsonProperty("id")
@@ -23,7 +26,7 @@ public class ServiceDTO {
     private String name;
 
     @JsonProperty("description")
-    private String  description;
+    private String description;
 
     @NotNull(message = "deve-se ser informado o valor!")
     @JsonProperty("price")
@@ -31,15 +34,13 @@ public class ServiceDTO {
 
     @NotNull(message = "deve-se ser informado o id do barbeiro!")
     @JsonProperty("barber")
-    private Barber barberId;
+    private int barber;
 
-
-    public  ServiceDTO(){}
-    public  ServiceDTO(Services service){
-        this.id= service.getId();
+    public ServiceDTO(Services service) {
+        this.id = service.getId();
         this.name = service.getName();
-        this.description =service.getDescription();
+        this.description = service.getDescription();
         this.price = service.getPrice();
-        this.barberId = service.getBarberId();
+        this.barber = service.getBarber().getId();
     }
 }
