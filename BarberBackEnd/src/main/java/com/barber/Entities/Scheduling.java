@@ -1,5 +1,6 @@
 package com.barber.Entities;
 
+import com.barber.Entities.Dtos.SchedulingDTO;
 import com.barber.Entities.Enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,11 +21,13 @@ public class Scheduling {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
+
     @ManyToOne
-    @JoinColumn(name = "barber_id")
+    @JoinColumn(name = "barber_id", referencedColumnName = "id", nullable = false)
     private Barber barber;
 
     @ManyToMany
@@ -36,7 +39,16 @@ public class Scheduling {
     private Set<Services> services;
 
     private Date date;
+
     private Status status;
 
+    public Scheduling(SchedulingDTO service, User user, Barber barber , Set<Services > services) {
+        this.id = service.getId();
+        this.user = user;
+        this.barber = barber;
+        this.services =services;
+        this.date = service.getDate();
+        this.status = service.getStatus();
+    }
 
 }

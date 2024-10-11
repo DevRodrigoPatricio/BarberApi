@@ -18,7 +18,7 @@ public class ServiceController {
     @Autowired
     private ServicesService service;
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
     @GetMapping
     public ResponseEntity<List<ServiceDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.findAll());
