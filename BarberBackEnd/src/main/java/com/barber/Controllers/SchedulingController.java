@@ -1,6 +1,8 @@
 package com.barber.Controllers;
 
 import com.barber.Entities.Dtos.SchedulingDTO;
+import com.barber.Entities.Dtos.ServiceDTO;
+import com.barber.Entities.Enums.Status;
 import com.barber.Services.SchedulingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,15 @@ public class SchedulingController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody SchedulingDTO data) {
+    public ResponseEntity<?> create(@Valid @RequestBody SchedulingDTO data) {
         service.create(data);
         return ResponseEntity.status(HttpStatus.CREATED).body("Agendamento feito com sucesso!");
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
+    @PutMapping(value = "/{id}")
+    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestParam Status status) {
+        service.update(id, status);
+        return ResponseEntity.status(HttpStatus.CREATED).body("agendamento atualizado com sucesso!");
     }
 }
