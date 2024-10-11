@@ -1,14 +1,16 @@
 package com.barber.Entities.Dtos;
 
-import com.barber.Entities.Enums.UserRoles;
-import com.barber.Entities.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.barber.Entities.Enums.Status;
+import com.barber.Entities.Scheduling;
+import com.barber.Entities.Services;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -16,32 +18,27 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SchedulingDTO {
 
-    @JsonProperty("id")
     private int id;
 
-    @NotNull(message = "O nome do usuário deve-se ser informado!")
-    @NotBlank(message = "O nome do usuário deve-se ser informado!")
-    private String name;
+    private int user;
 
-    @NotNull(message = "O email do usuário deve-se ser informado!")
-    @NotBlank(message = "O email do usuário deve-se ser informado!")
-    private String email;
+    private int barber;
 
-    @NotNull(message = "A senha do usuário deve-se ser informado!")
-    @NotBlank(message = "A senha do usuário deve-se ser informado!")
-    private String password;
+    private Set<Integer> services;
 
-    private UserRoles role;
+    private Date date;
+    private Status status;
 
-    private boolean active;
-
-    public SchedulingDTO(User user) {
-        this.id = user.getId();
-        this.name = user.getName();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.role = user.getRole();
-        this.active = user.isActive();
+    public SchedulingDTO(Scheduling scheduling) {
+        this.id = scheduling.getId();
+        this.user = scheduling.getUser().getId();
+        this.barber = scheduling.getBarber().getId();
+        this.services = scheduling.getServices()
+                .stream()
+                .map(x -> x.getId())
+                .collect(Collectors.toSet());
+        this.date = scheduling.getDate();
+        this.status = scheduling.getStatus();
     }
 
 
