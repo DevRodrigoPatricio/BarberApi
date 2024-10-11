@@ -1,7 +1,9 @@
 package com.barber.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -9,10 +11,12 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Assessment {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -25,7 +29,7 @@ public class Assessment {
             inverseJoinColumns = @JoinColumn(name = "service_id") // Coluna de junção para Service
     )
     private Set<Services> services;
-    private int  notice;
+    private int notice;
 
 
     @Column(name = "comment", length = 255, nullable = true)

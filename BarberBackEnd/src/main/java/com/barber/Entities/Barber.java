@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Barber {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name", length = 150, nullable = false)

@@ -9,6 +9,7 @@ public enum Status {
     Canceled("Cancelado"),
     ;
     private final String status;
+
     Status(String status) {
         this.status = status;
     }

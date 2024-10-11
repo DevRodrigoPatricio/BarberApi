@@ -5,11 +5,15 @@ import com.barber.Entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SchedulingDTO {
 
     @JsonProperty("id")
@@ -31,14 +35,12 @@ public class SchedulingDTO {
 
     private boolean active;
 
-    public SchedulingDTO(){}
-
     public SchedulingDTO(User user) {
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.password= user.getPassword();
-        this.role =user.getRole();
+        this.password = user.getPassword();
+        this.role = user.getRole();
         this.active = user.isActive();
     }
 

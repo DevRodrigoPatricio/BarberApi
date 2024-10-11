@@ -19,7 +19,7 @@ public class BarberController {
     private BarberService service;
 
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
     @GetMapping
     public ResponseEntity<List<BarberDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.findAll());
@@ -27,15 +27,15 @@ public class BarberController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
-    public ResponseEntity create(@Valid @RequestBody BarberDTO data){
+    public ResponseEntity create(@Valid @RequestBody BarberDTO data) {
         service.create(data);
         return ResponseEntity.status(HttpStatus.CREATED).body("Barbeiro criado com sucesso!");
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
     @PutMapping(value = "/{id}")
-    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody BarberDTO data){
-        service.update(id,data);
-        return  ResponseEntity.status(HttpStatus.CREATED).body("Barbeiro atualizado com sucesso!");
+    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody BarberDTO data) {
+        service.update(id, data);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Barbeiro atualizado com sucesso!");
     }
 }

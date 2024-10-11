@@ -1,17 +1,18 @@
 package com.barber.Entities.Dtos;
 
 import com.barber.Entities.Barber;
-import com.barber.Entities.Enums.UserRoles;
-import com.barber.Entities.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BarberDTO {
 
 
@@ -28,8 +29,6 @@ public class BarberDTO {
     @JsonProperty("specialties")
     private String specialties;
 
-
-    public BarberDTO(){}
 
     public BarberDTO(Barber barber) {
         this.id = barber.getId();

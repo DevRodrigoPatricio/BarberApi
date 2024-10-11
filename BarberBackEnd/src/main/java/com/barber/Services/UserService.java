@@ -29,6 +29,7 @@ public class UserService {
     private TokenService tokenService;
     @Autowired
     private EmailService emailService;
+
     @Autowired
     public UserService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
