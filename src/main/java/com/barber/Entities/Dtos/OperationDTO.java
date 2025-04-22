@@ -1,9 +1,13 @@
 package com.barber.Entities.Dtos;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalTime;
 
 public record OperationDTO(
         String dayOfTheWeek,
-        LocalDateTime openingHours,
-        LocalDateTime closingTime
+        @JsonFormat(pattern = "HH:mm")
+        LocalTime openingHours,
+        @JsonFormat(pattern = "HH:mm")
+        LocalTime closingTime
 ) {}
