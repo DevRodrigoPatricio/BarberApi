@@ -1,5 +1,6 @@
 package com.barber.Entities.Dtos;
 
+
 import com.barber.Entities.Barber;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;

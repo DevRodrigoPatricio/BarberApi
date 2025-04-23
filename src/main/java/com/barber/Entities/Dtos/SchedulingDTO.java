@@ -2,7 +2,6 @@ package com.barber.Entities.Dtos;
 
 import com.barber.Entities.Enums.Status;
 import com.barber.Entities.Scheduling;
-import com.barber.Entities.Services;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

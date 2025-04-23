@@ -1,7 +1,6 @@
 package com.barber.Controllers;
 
 import com.barber.Entities.Dtos.SchedulingDTO;
-import com.barber.Entities.Dtos.ServiceDTO;
 import com.barber.Entities.Enums.Status;
 import com.barber.Services.SchedulingService;
 import jakarta.validation.Valid;
