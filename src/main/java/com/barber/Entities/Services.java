@@ -34,6 +34,10 @@ public class Services {
     @JoinColumn(name = "barber_id", referencedColumnName = "id", nullable = false)
     private Barber barber;
 
+    @ManyToOne
+    @JoinColumn(name = "barberShop_id", referencedColumnName = "id", nullable = false)
+    private BarberShop barberShop;
+
     public Services(@Valid ServiceDTO serviceDTO) {
     }
 

@@ -23,6 +23,11 @@ public class Barber {
     @Column(name = "specialties", length = 255, nullable = true)
     private String specialties;
 
+    @ManyToOne
+    @JoinColumn(name = "barberShop_id", referencedColumnName = "id", nullable = false)
+    private BarberShop barberShop;
+
+
     public Barber(BarberDTO barberDTO) {
         this.name = barberDTO.getName();
         this.specialties = barberDTO.getSpecialties();

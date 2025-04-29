@@ -30,6 +30,10 @@ public class BarberDTO {
     @JsonProperty("specialties")
     private String specialties;
 
+    @NotNull(message = "deve ser informado o id da barbearia!")
+    @JsonProperty("barberShop")
+    private int barberShop;
+
 
     public BarberDTO(Barber barber) {
         this.id = barber.getId();

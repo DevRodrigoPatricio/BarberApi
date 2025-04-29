@@ -39,20 +39,4 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuário atualizado com sucesso!");
     }
 
-    @PostMapping("/forgot-password")
-    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
-        service.sendRecoveryEmail(email);
-        return ResponseEntity.ok("Email de recuperação enviado com sucesso.");
-    }
-
-    @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestParam String token, @RequestParam String newPassword) {
-        boolean success = service.resetPassword(token, newPassword);
-        if (success) {
-            return ResponseEntity.ok("Senha redefinida com sucesso.");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token inválido ou expirado.");
-        }
-    }
-
 }

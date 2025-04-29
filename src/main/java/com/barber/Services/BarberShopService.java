@@ -25,6 +25,7 @@ public class BarberShopService {
 
         return barberShops.stream()
                 .map(barberShop -> new CreateBarberShopDTO(
+                        barberShop.getId(),
                         barberShop.getName(),
                         barberShop.getCnpj(),
                         barberShop.getTelephone(),
