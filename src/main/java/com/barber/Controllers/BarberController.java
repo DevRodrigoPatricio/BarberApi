@@ -19,10 +19,16 @@ public class BarberController {
     private BarberService service;
 
 
-    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<BarberDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.findAll());
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','CLIENT')")
+    @GetMapping(value ="/{idBarberShop}")
+    public ResponseEntity<List<BarberDTO>> findByBarberShop(@PathVariable Integer idBarberShop) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.findByBarberShopid(idBarberShop));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")

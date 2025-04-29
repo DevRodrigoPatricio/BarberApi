@@ -39,6 +39,7 @@ public class BarberDTO {
         this.id = barber.getId();
         this.name = barber.getName();
         this.specialties = barber.getSpecialties();
+        this.barberShop = barber.getBarberShop().getId();
     }
 
 
