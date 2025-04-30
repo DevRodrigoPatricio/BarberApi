@@ -1,7 +1,6 @@
 package com.barber.Controllers;
 
 
-import com.barber.Entities.Dtos.BarberDTO;
 import com.barber.Entities.Dtos.CreateBarberShopDTO;
 import com.barber.Services.BarberShopService;
 import jakarta.validation.Valid;

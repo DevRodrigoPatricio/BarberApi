@@ -1,5 +1,6 @@
 package com.barber.Entities.Dtos;
 
+import com.barber.Entities.BarberShop;
 import com.barber.Entities.Services;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
@@ -36,11 +37,16 @@ public class ServiceDTO {
     @JsonProperty("barber")
     private int barber;
 
+    @NotNull(message = "deve-se ser informado o id da barbearia!")
+    @JsonProperty("barberShop")
+    private int barberShop;
+
     public ServiceDTO(Services service) {
         this.id = service.getId();
         this.name = service.getName();
         this.description = service.getDescription();
         this.price = service.getPrice();
         this.barber = service.getBarber().getId();
+        this.barberShop = service.getBarberShop().getId();
     }
 }

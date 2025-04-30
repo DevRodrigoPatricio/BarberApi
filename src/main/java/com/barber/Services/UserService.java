@@ -27,8 +27,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     @Autowired
     private TokenService tokenService;
-    @Autowired
-    private EmailService emailService;
 
     @Autowired
     public UserService(PasswordEncoder passwordEncoder) {
@@ -68,41 +66,5 @@ public class UserService {
         return repository.save(oldUser);
     }
 
-    public void sendRecoveryEmail(String email) {
-        User user = (User) repository.findByEmail(email);
-        if (user == null) {
-            throw new IllegalArgumentException("Usuário não encontrado.");
-        }
 
-        String token = tokenService.generateToken(user);
-        String link = "https://seuapp.com/reset-password?token=" + token;
-
-        String subject = "Recuperação de Senha";
-        String body = "Olá " + user.getName() + ",\n\n" +
-                "Clique no link abaixo para redefinir sua senha:\n" +
-                link + "\n\n" +
-                "Se você não solicitou a recuperação de senha, ignore este email.";
-
-        try {
-            emailService.send(user.getEmail(), subject, body);
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao enviar o email de recuperação de senha.", e);
-        }
-    }
-
-    public boolean resetPassword(String token, String newPassword) {
-        String email = tokenService.ValidateToken(token);
-        if (email.isEmpty()) {
-            return false;
-        }
-
-        User user = (User) repository.findByEmail(email);
-        if (user == null) {
-            return false;
-        }
-
-        user.setPassword(passwordEncoder.encode(newPassword));
-        repository.save(user);
-        return true;
-    }
 }
