@@ -1,5 +1,6 @@
 package com.barber.Entities.Dtos;
 
+
 import com.barber.Entities.Barber;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
@@ -29,11 +30,16 @@ public class BarberDTO {
     @JsonProperty("specialties")
     private String specialties;
 
+    @NotNull(message = "deve ser informado o id da barbearia!")
+    @JsonProperty("barberShop")
+    private int barberShop;
+
 
     public BarberDTO(Barber barber) {
         this.id = barber.getId();
         this.name = barber.getName();
         this.specialties = barber.getSpecialties();
+        this.barberShop = barber.getBarberShop().getId();
     }
 
 

@@ -31,7 +31,7 @@ public class UserDTO {
 
     @NotNull(message = "A senha do usuário deve-se ser informado!")
     @NotBlank(message = "A senha do usuário deve-se ser informado!")
-    @JsonProperty("password")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @JsonProperty("role")

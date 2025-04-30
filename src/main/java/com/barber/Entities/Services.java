@@ -34,14 +34,19 @@ public class Services {
     @JoinColumn(name = "barber_id", referencedColumnName = "id", nullable = false)
     private Barber barber;
 
+    @ManyToOne
+    @JoinColumn(name = "barberShop_id", referencedColumnName = "id", nullable = false)
+    private BarberShop barberShop;
+
     public Services(@Valid ServiceDTO serviceDTO) {
     }
 
-    public Services(ServiceDTO service, Barber barber) {
+    public Services(ServiceDTO service, Barber barber, BarberShop  barberShop  ) {
         this.id = service.getId();
         this.name = service.getName();
         this.description = service.getDescription();
         this.price = service.getPrice();
         this.barber = barber;
+        this.barberShop = barberShop;
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ServiceRepository extends JpaRepository<Services, Integer> {
 
-    List<Services> findByName(String name);
+    List<Services> findByNameContaining(String name);
 }

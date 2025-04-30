@@ -30,6 +30,10 @@ public class Scheduling {
     @JoinColumn(name = "barber_id", referencedColumnName = "id", nullable = false)
     private Barber barber;
 
+    @ManyToOne
+    @JoinColumn(name = "barberShop_id", referencedColumnName = "id", nullable = false)
+    private BarberShop barberShop;
+
     @ManyToMany
     @JoinTable(
             name = "scheduling_service",

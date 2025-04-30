@@ -2,7 +2,6 @@ package com.barber.Entities.Dtos;
 
 import com.barber.Entities.Enums.Status;
 import com.barber.Entities.Scheduling;
-import com.barber.Entities.Services;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -39,6 +38,10 @@ public class SchedulingDTO {
     private Date date;
     private Status status;
 
+    @NotNull(message = "deve-se ser informado o id da barbearia!")
+    @JsonProperty("barberShop")
+    private int barberShop;
+
     public SchedulingDTO(Scheduling scheduling) {
         this.id = scheduling.getId();
         this.user = scheduling.getUser().getId();
@@ -49,6 +52,7 @@ public class SchedulingDTO {
                 .collect(Collectors.toSet());
         this.date = scheduling.getDate();
         this.status = scheduling.getStatus();
+        this.barberShop = scheduling.getBarberShop().getId();
     }
 
 
