@@ -41,11 +41,12 @@ public class Services {
     public Services(@Valid ServiceDTO serviceDTO) {
     }
 
-    public Services(ServiceDTO service, Barber barber) {
+    public Services(ServiceDTO service, Barber barber, BarberShop  barberShop  ) {
         this.id = service.getId();
         this.name = service.getName();
         this.description = service.getDescription();
         this.price = service.getPrice();
         this.barber = barber;
+        this.barberShop = barberShop;
     }
 }

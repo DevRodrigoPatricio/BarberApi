@@ -16,7 +16,7 @@ public class Barber {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "name", length = 150, nullable = false)
     private String name;
@@ -28,8 +28,9 @@ public class Barber {
     private BarberShop barberShop;
 
 
-    public Barber(BarberDTO barberDTO) {
+    public Barber(BarberDTO barberDTO ,BarberShop barberShop ) {
         this.name = barberDTO.getName();
         this.specialties = barberDTO.getSpecialties();
+        this.barberShop = barberShop;
     }
 }

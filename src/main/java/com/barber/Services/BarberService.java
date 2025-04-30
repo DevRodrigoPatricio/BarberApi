@@ -40,7 +40,7 @@ public class BarberService {
 
     public BarberDTO create(BarberDTO barberDTO) {
         BarberShop barberShop = barberShopRepository.findById(barberDTO.getBarberShop()).get();
-        Barber barber = new Barber(barberDTO);
+        Barber barber = new Barber(barberDTO , barberShop);
         barber.setBarberShop(barberShop);
         repository.save(barber);
         return new BarberDTO(barber);
@@ -48,7 +48,8 @@ public class BarberService {
 
     public void update(Integer id, @Valid BarberDTO barberDTO) {
         Barber oldBarber = findById(id);
-        oldBarber = new Barber(barberDTO);
+        BarberShop barberShop = barberShopRepository.findById(barberDTO.getBarberShop()).get();
+        oldBarber = new Barber(barberDTO, barberShop);
         oldBarber.setId(id);
         repository.save(oldBarber);
     }
